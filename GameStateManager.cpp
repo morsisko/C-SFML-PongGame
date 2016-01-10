@@ -1,11 +1,15 @@
 #include "GameStateManager.h"
 
 
-GameStateManager::GameStateManager(State* state)
+GameStateManager::GameStateManager()
 {
-	currentState = state;
+	;
 }
 
+void GameStateManager::init(State* currentState)
+{
+	this->currentState = currentState;
+}
 
 void GameStateManager::render(sf::RenderWindow *window)
 {
@@ -15,6 +19,12 @@ void GameStateManager::render(sf::RenderWindow *window)
 void GameStateManager::update(float deltaTime)
 {
 	currentState->update(deltaTime);
+}
+
+void GameStateManager::setState(State* state)
+{
+	currentState->destroy();
+	currentState = state;
 }
 
 

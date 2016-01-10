@@ -3,7 +3,10 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
-	GameStateManager *gsm = new GameStateManager(new MenuState(&window));
+	window.setFramerateLimit(60);
+	sf::Clock frameClock;
+	GameStateManager *gsm = new GameStateManager();
+	gsm->init(new MenuState(&window, gsm));
 
 	while (window.isOpen())
 	{
@@ -16,6 +19,7 @@ int main()
 
 		window.clear();
 		
+		gsm->update(frameClock.restart().asSeconds());
 		gsm->render(&window);
 
 		window.display();
