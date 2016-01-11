@@ -1,9 +1,10 @@
 #include "GameObject.h"
-GameObject::GameObject(float x, float y)
+GameObject::GameObject(float x, float y, std::string filename)
 {
 	position.x = x;
 	position.y = y;
 	updateCollider(false);
+	loadTexture(filename);
 
 }
 
@@ -14,6 +15,12 @@ GameObject::GameObject(float x, float y, float width, float height)
 	bounds.x = width;
 	bounds.y = height;
 	updateCollider(true);
+}
+
+void GameObject::loadTexture(std::string filename)
+{
+	texture.loadFromFile("assets/" + filename);
+	drawableSprite.setTexture(texture);
 }
 
 void GameObject::updateCollider(bool includeBounds)
@@ -83,6 +90,11 @@ void GameObject::move(float deltaTime, direction dir)
 	}
 
 	updateCollider(false);
+}
+
+void GameObject::setSpeed(float speed)
+{
+	this->speed = speed;
 }
 
 void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const

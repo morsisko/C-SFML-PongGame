@@ -15,12 +15,21 @@ void GameState::render(sf::RenderWindow* window)
 
 void GameState::update(float deltaTime)
 {
-	;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+		player1->move(deltaTime, UP);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		player1->move(deltaTime, DOWN);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		player2->move(deltaTime, UP);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		player2->move(deltaTime, DOWN);
 }
 
 void GameState::destroy()
 {
-	;
+	delete player1;
+	delete player2;
 }
 
 
