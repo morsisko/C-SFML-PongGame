@@ -7,11 +7,12 @@ class State
 {
 protected:
 	GameStateManager* gsm;
+	sf::RenderWindow *window;
 public:
-	State(GameStateManager* gsm);
+	State(sf::RenderWindow *window, GameStateManager* gsm);
 	State();
 	virtual void update(float deltaTime) = 0;
-	virtual void render(sf::RenderWindow *window) = 0;
+	virtual void render() = 0;
 	virtual void destroy() = 0;
 	virtual ~State();
 };

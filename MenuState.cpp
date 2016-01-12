@@ -1,8 +1,7 @@
 #include "MenuState.h"
 
-MenuState::MenuState(sf::RenderWindow* window, GameStateManager *gsm)
+MenuState::MenuState(sf::RenderWindow* window, GameStateManager *gsm) : State(window, gsm)
 {
-	this->gsm = gsm;
 	font = new sf::Font();
 	font->loadFromFile("assets/TransformersMovie.ttf");
 
@@ -15,7 +14,7 @@ MenuState::MenuState(sf::RenderWindow* window, GameStateManager *gsm)
 
 }
 
-void MenuState::render(sf::RenderWindow* window)
+void MenuState::render()
 {
 	mouse = sf::Mouse::getPosition(*window);
 	window->draw(*mainText);
@@ -34,7 +33,7 @@ void MenuState::update(float deltaTime)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			gsm->setState(new GameState(gsm));
+			gsm->setState(new GameState(window, gsm));
 		}
 		else
 			startGame->setColor(sf::Color::Blue);

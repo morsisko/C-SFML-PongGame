@@ -1,9 +1,10 @@
 #include "State.h"
 
 
-State::State(GameStateManager *gsm)
+State::State(sf::RenderWindow *window, GameStateManager* gsm)
 {
 	this->gsm = gsm;
+	this->window = window;
 }
 
 State::State()

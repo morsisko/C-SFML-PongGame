@@ -14,7 +14,7 @@ private:
 	sf::Vector2i mouse;
 public:
 	MenuState(sf::RenderWindow* window, GameStateManager *gsm);
-	virtual void render(sf::RenderWindow* window) override;
+	virtual void render() override;
 	virtual void update(float deltaTime) override;
 	virtual void destroy() override;
 	~MenuState();

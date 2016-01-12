@@ -12,7 +12,7 @@ public:
 	void init(State* currentState);
 	void setState(State* state);
 	void update(float deltaTime);
-	void render(sf::RenderWindow *window);
+	void render();
 	~GameStateManager();
 };
 

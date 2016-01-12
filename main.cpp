@@ -2,7 +2,7 @@
 #include "MenuState.h"
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(1280, 800), "SFML works!");
 	window.setFramerateLimit(60);
 	sf::Clock frameClock;
 	GameStateManager *gsm = new GameStateManager();
@@ -20,7 +20,7 @@ int main()
 		window.clear();
 		
 		gsm->update(frameClock.restart().asSeconds());
-		gsm->render(&window);
+		gsm->render();
 
 		window.display();
 	}

@@ -3,8 +3,10 @@ GameObject::GameObject(float x, float y, std::string filename)
 {
 	position.x = x;
 	position.y = y;
-	updateCollider(false);
 	loadTexture(filename);
+	bounds.x = texture.getSize().x;
+	bounds.y = texture.getSize().y;
+	updateCollider(true);
 
 }
 
@@ -47,60 +49,68 @@ void GameObject::move(float deltaTime, direction dir)
 {
 	if (dir == UP)
 	{
-		position.y -= (speed * deltaTime);
+		position.y -= (verticalSpeed * deltaTime);
 	}
 	
 	else if (dir == DOWN)
 	{
-		position.y += (speed * deltaTime);
+		position.y += (verticalSpeed * deltaTime);
 	}
 
 	else if (dir == LEFT)
 	{
-		position.x -= (speed * deltaTime);
+		position.x -= (horizonSpeed * deltaTime);
+		position.y -= (verticalSpeed * deltaTime);
 	}
 
 	else if (dir == RIGHT)
 	{
-		position.x += (speed * deltaTime);
-	}
-
-	else if (dir == LEFTUP)
-	{
-		position.x -= (speed * deltaTime);
-		position.y -= (speed * deltaTime);
-	}
-
-	else if (dir == RIGHTUP)
-	{
-		position.x += (speed * deltaTime);
-		position.y -= (speed * deltaTime);
-	}
-
-	else if (dir == LEFTDOWN)
-	{
-		position.x -= (speed * deltaTime);
-		position.y += (speed * deltaTime);
-	}
-
-	else if (dir == RIGHTDOWN)
-	{
-		position.x += (speed * deltaTime);
-		position.y += (speed * deltaTime);
+		position.x += (horizonSpeed * deltaTime);
+		position.y -= (verticalSpeed * deltaTime);
 	}
 
 	updateCollider(false);
 }
 
-void GameObject::setSpeed(float speed)
+void GameObject::setSpeed(float horizonSpeed, float verticalSpeed)
 {
-	this->speed = speed;
+	this->horizonSpeed = horizonSpeed;
+	this->verticalSpeed = verticalSpeed;
+}
+
+void GameObject::setVerticalSpeed(float verticalSpeed)
+{
+	this->verticalSpeed = verticalSpeed;
+}
+
+void GameObject::reverseVerticalSpeed()
+{
+	this->verticalSpeed *= -1;
+}
+
+bool GameObject::checkCollision(GameObject *object)
+{
+	if (this->collider.intersects(object->collider) && this != object->lastColliderObject)
+	{
+		this->lastColliderObject = object;
+		object->lastColliderObject = this;
+		return true;
+	}
+
+	else return false;
+}
+
+sf::FloatRect GameObject::getCollider()
+{
+	return collider;
 }
 
 void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(drawableSprite, states);
 }
+
+
 
 
 GameObject::~GameObject()
