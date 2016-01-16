@@ -4,17 +4,22 @@
 #include "Ball.h"
 #include "State.h"
 #include "Wall.h"
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
+#include "TextureManager.h"
+#include "BonusManager.h"
 class GameState :
 	public State
 {
 private:
 	GameObject *player1;
 	GameObject *player2;
-	GameObject *ball;
+	Ball *ball;
 	GameObject *topWall;
 	GameObject *bottomWall;
 	sf::Sprite *background;
 	sf::Texture backgroundTexture;
+	BonusManager *bmanager;
 public:
 	GameState(sf::RenderWindow *window, GameStateManager *gsm);
 	virtual void render() override;
@@ -22,4 +27,6 @@ public:
 	virtual void destroy() override;
 	~GameState();
 };
+
+#endif
 

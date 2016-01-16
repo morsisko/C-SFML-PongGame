@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYERPADDLE_H
+#define PLAYERPADDLE_H
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
 enum playerNumber{FIRST, SECOND};
@@ -11,3 +12,4 @@ public:
 	~PlayerPaddle();
 };
 
+#endif

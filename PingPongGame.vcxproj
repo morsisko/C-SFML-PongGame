@@ -71,23 +71,37 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="BonusManager.cpp" />
+    <ClCompile Include="Buff.cpp" />
+    <ClCompile Include="BuffManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="InstantBallSpeed.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PlayerPaddle.cpp" />
+    <ClCompile Include="SlowPlayer.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Bonus.h" />
+    <ClInclude Include="BonusManager.h" />
+    <ClInclude Include="Buff.h" />
+    <ClInclude Include="BuffManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="InstantBallSpeed.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PlayerPaddle.h" />
+    <ClInclude Include="SlowPlayer.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

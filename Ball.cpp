@@ -3,12 +3,13 @@
 
 Ball::Ball(float x, float y) : GameObject(x, y, "ball.png")
 {
+	type = BALL;
 	position.x -= (collider.width / 2);
 	position.y -= (collider.height / 2);
 	updateCollider(false);
 	dir = LEFT;
-	verticalSpeed = 0.0f;
-	horizonSpeed = 450.0f;
+	currentSpeed.verticalSpeed = 0.0f;
+	currentSpeed.horizonSpeed = 800.0f;
 }
 
 void Ball::changeDirection()
@@ -25,13 +26,18 @@ void Ball::move(float deltaTime)
 void Ball::onCollisionWithPaddle()
 {
 	changeDirection();
-	verticalSpeed = 2 * (lastColliderObject->getCollider().top + (lastColliderObject->getCollider().height / 2) - (this->position.y + (this->collider.height / 2)));
-	std::cout << "Roznica od srodka: " << verticalSpeed << std::endl;
+	lastPlayer = lastColliderObject;
+	currentSpeed.verticalSpeed = 3 * (lastColliderObject->getCollider().top + (lastColliderObject->getCollider().height / 2) - (this->position.y + (this->collider.height / 2)));
 }
 
 void Ball::onCollisionWithWall()
 {
-	verticalSpeed *= -1;
+	currentSpeed.verticalSpeed *= -1;
+}
+
+GameObject* Ball::getLastPlayer()
+{
+	return lastPlayer;
 }
 
 

@@ -3,9 +3,10 @@
 
 PlayerPaddle::PlayerPaddle(int x, int y, playerNumber number) : GameObject(x, y, "player" + std::to_string((int)number) + ".png")
 {
+	type = PLAYER;
 	position.y -= (collider.height / 2);
 	updateCollider(false);
-	verticalSpeed = 450.0f;
+	currentSpeed.verticalSpeed = 450.0f;
 }
 
 

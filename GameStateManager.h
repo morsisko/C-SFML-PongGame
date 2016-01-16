@@ -1,6 +1,6 @@
 #ifndef GAMESTATEMANAGER_H
 #define GAMESTATEMANAGER_H
-#pragma once
+
 #include <SFML\Graphics.hpp>
 #include "State.h"
 class GameStateManager

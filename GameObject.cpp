@@ -1,4 +1,18 @@
 #include "GameObject.h"
+#include "BuffManager.h"
+
+GameObject::GameObject(float x, float y, sf::Texture texture)
+{
+	position.x = x;
+	position.y = y;
+	this->texture = texture;
+	drawableSprite.setTexture(this->texture);
+	bounds.x = this->texture.getSize().x;
+	bounds.y = this->texture.getSize().y;
+	updateCollider(true);
+	manager = new BuffManager();
+}
+
 GameObject::GameObject(float x, float y, std::string filename)
 {
 	position.x = x;
@@ -7,6 +21,7 @@ GameObject::GameObject(float x, float y, std::string filename)
 	bounds.x = texture.getSize().x;
 	bounds.y = texture.getSize().y;
 	updateCollider(true);
+	manager = new BuffManager();
 
 }
 
@@ -17,6 +32,7 @@ GameObject::GameObject(float x, float y, float width, float height)
 	bounds.x = width;
 	bounds.y = height;
 	updateCollider(true);
+	manager = new BuffManager();
 }
 
 void GameObject::loadTexture(std::string filename)
@@ -49,24 +65,24 @@ void GameObject::move(float deltaTime, direction dir)
 {
 	if (dir == UP)
 	{
-		position.y -= (verticalSpeed * deltaTime);
+		position.y -= (currentSpeed.verticalSpeed * deltaTime);
 	}
 	
 	else if (dir == DOWN)
 	{
-		position.y += (verticalSpeed * deltaTime);
+		position.y += (currentSpeed.verticalSpeed * deltaTime);
 	}
 
 	else if (dir == LEFT)
 	{
-		position.x -= (horizonSpeed * deltaTime);
-		position.y -= (verticalSpeed * deltaTime);
+		position.x -= (currentSpeed.horizonSpeed * deltaTime);
+		position.y -= (currentSpeed.verticalSpeed * deltaTime);
 	}
 
 	else if (dir == RIGHT)
 	{
-		position.x += (horizonSpeed * deltaTime);
-		position.y -= (verticalSpeed * deltaTime);
+		position.x += (currentSpeed.horizonSpeed * deltaTime);
+		position.y -= (currentSpeed.verticalSpeed * deltaTime);
 	}
 
 	updateCollider(false);
@@ -74,35 +90,57 @@ void GameObject::move(float deltaTime, direction dir)
 
 void GameObject::setSpeed(float horizonSpeed, float verticalSpeed)
 {
-	this->horizonSpeed = horizonSpeed;
-	this->verticalSpeed = verticalSpeed;
+	this->currentSpeed.horizonSpeed = horizonSpeed;
+	this->currentSpeed.verticalSpeed = verticalSpeed;
 }
 
 void GameObject::setVerticalSpeed(float verticalSpeed)
 {
-	this->verticalSpeed = verticalSpeed;
+	this->currentSpeed.verticalSpeed = verticalSpeed;
 }
 
 void GameObject::reverseVerticalSpeed()
 {
-	this->verticalSpeed *= -1;
+	this->currentSpeed.verticalSpeed *= -1;
 }
 
 bool GameObject::checkCollision(GameObject *object)
 {
-	if (this->collider.intersects(object->collider) && this != object->lastColliderObject)
+	if (object == nullptr) return false;
+
+	if (object->lastColliderObject == nullptr)
+	{
+		if (collider.intersects(object->collider))
+		{
+			this->lastColliderObject = object;
+			object->lastColliderObject = this;
+			return true;
+		}
+	}
+
+	else if (this->collider.intersects(object->collider) && this != object->lastColliderObject)
 	{
 		this->lastColliderObject = object;
 		object->lastColliderObject = this;
 		return true;
 	}
 
-	else return false;
+	return false;
+}
+
+bool GameObject::isType(objectType type)
+{
+	return this->type == type;
 }
 
 sf::FloatRect GameObject::getCollider()
 {
 	return collider;
+}
+
+void GameObject::updateBuffs(float deltaTime)
+{
+	manager->update(deltaTime, this);
 }
 
 void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -111,8 +149,7 @@ void GameObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 
-
-
 GameObject::~GameObject()
 {
+	delete manager;
 }

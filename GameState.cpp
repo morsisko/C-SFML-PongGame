@@ -8,10 +8,12 @@ GameState::GameState(sf::RenderWindow *window, GameStateManager *gsm) : State(wi
 	ball = new Ball(window->getSize().x / 2, window->getSize().y / 2);
 	topWall = new Wall(0.0f, 0.0f);
 	bottomWall = new Wall(0, window->getSize().y - 5.0f);
+	bmanager = new BonusManager();
 	background = new sf::Sprite();
 	backgroundTexture.loadFromFile("assets/background.png");
 	background->setTexture(backgroundTexture);
 	background->setPosition(0, 0);
+
 }
 
 void GameState::render()
@@ -22,6 +24,7 @@ void GameState::render()
 	window->draw(*ball);
 	window->draw(*topWall);
 	window->draw(*bottomWall);
+	bmanager->render(window);
 }
 
 void GameState::update(float deltaTime)
@@ -36,13 +39,18 @@ void GameState::update(float deltaTime)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		player2->move(deltaTime, DOWN);
 
+	player1->updateBuffs(deltaTime);
+	player2->updateBuffs(deltaTime);
+	ball->updateBuffs(deltaTime);
+	bmanager->checkColision(ball);
+
 	if (player1->checkCollision(ball) || player2->checkCollision(ball))
-		((Ball*)(ball))->onCollisionWithPaddle();
+		ball->onCollisionWithPaddle();
 
-	if (topWall->checkCollision(ball) || bottomWall->checkCollision(ball))
-		((Ball*)(ball))->onCollisionWithWall();
+	else if (topWall->checkCollision(ball) || bottomWall->checkCollision(ball))
+		ball->onCollisionWithWall();
 
-	((Ball*)(ball))->move(deltaTime);
+	ball->move(deltaTime);
 }
 
 void GameState::destroy()
@@ -51,6 +59,9 @@ void GameState::destroy()
 	delete player2;
 	delete background;
 	delete ball;
+	delete topWall;
+	delete bottomWall;
+	delete bmanager;
 }
 
 
