@@ -1,10 +1,10 @@
 #ifndef BUFF_H
 #define BUFF_H
-#include "GameObject.h"
+#include "PlayerPaddle.h"
 enum BuffTarget {ALL, BALL_O, PLAYER_O};
 class Buff
 {
-private:
+protected:
 	float buffDuration = 5.0f;
 	float elapsedTime = 0.0f;
 public:
@@ -12,8 +12,8 @@ public:
 	BuffTarget target;
 	void update(float deltaTime);
 	bool isOverTime();
-	virtual void onBuffStart(GameObject *ball) = 0;
-	virtual void onBuffEnd(GameObject *ball) = 0;
+	virtual void onBuffStart(GameObject *object) = 0;
+	virtual void onBuffEnd(GameObject *object) = 0;
 	~Buff();
 };
 

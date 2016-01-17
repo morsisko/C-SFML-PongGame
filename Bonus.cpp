@@ -1,15 +1,10 @@
 #include "Bonus.h"
 
 
-Bonus::Bonus(float x, float y, sf::Texture texture, Buff *buff) : GameObject(x, y, texture)
+Bonus::Bonus(float x, float y, sf::Texture texture, Buff *buff) : GameObject("Bonus", x, y, texture)
 {
 	this->buff = buff;
 	type = BONUS;
-}
-
-void Bonus::onCollision(GameObject *object)
-{
-	if (object->isType(BALL)) {};
 }
 
 Buff* Bonus::getBuff()

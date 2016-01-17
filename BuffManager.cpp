@@ -20,6 +20,7 @@ void BuffManager::update(float deltaTime, GameObject *owner)
 		if (buffsArray[i]->isOverTime())
 		{
 			buffsArray[i]->onBuffEnd(owner);
+			delete buffsArray[i];
 			buffsArray.erase(buffsArray.begin() + i);
 			std::cout << "erasing" << std::endl;
 			break;

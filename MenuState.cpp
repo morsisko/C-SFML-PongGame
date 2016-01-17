@@ -25,6 +25,9 @@ void MenuState::render()
 void MenuState::update(float deltaTime)
 {
 	if (quitGame->getGlobalBounds().contains(mouse.x, mouse.y))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+			window->close();
+		else
 		quitGame->setColor(sf::Color::Blue);
 	else
 		quitGame->setColor(sf::Color::White);

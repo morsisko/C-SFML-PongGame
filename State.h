@@ -2,6 +2,7 @@
 #define STATE_H
 #pragma once
 #include <SFML\Graphics.hpp>
+//#include "GameStateManager.h"
 class GameStateManager;
 class State
 {

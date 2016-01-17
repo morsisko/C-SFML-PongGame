@@ -3,6 +3,9 @@
 #include <vector>
 #include "InstantBallSpeed.h"
 #include "SlowPlayer.h"
+#include "SwapPaddles.h"
+#include "Reverse.h"
+#include "SpeedPaddle.h"
 #include <iostream>
 class BuffManager
 {

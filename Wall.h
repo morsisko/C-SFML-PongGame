@@ -5,7 +5,7 @@ class Wall :
 	public GameObject
 {
 public:
-	Wall(float x, float y);
+	Wall(std::string name, float x, float y);
 	~Wall();
 };
 

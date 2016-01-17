@@ -82,8 +82,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PlayerPaddle.cpp" />
+    <ClCompile Include="Reverse.cpp" />
     <ClCompile Include="SlowPlayer.cpp" />
+    <ClCompile Include="SpeedPaddle.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="SwapPaddles.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -99,8 +102,11 @@
     <ClInclude Include="InstantBallSpeed.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PlayerPaddle.h" />
+    <ClInclude Include="Reverse.h" />
     <ClInclude Include="SlowPlayer.h" />
+    <ClInclude Include="SpeedPaddle.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="SwapPaddles.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>

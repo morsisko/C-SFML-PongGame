@@ -1,7 +1,7 @@
 #include "Wall.h"
 
 
-Wall::Wall(float x, float y) : GameObject(x, y, "wall.png")
+Wall::Wall(std::string name, float x, float y) : GameObject(name, x, y, "wall.png")
 {
 	type = WALL;
 }

@@ -1,13 +1,12 @@
 #pragma once
 #include "Buff.h"
-#include <iostream>
-class SlowPlayer :
+class SpeedPaddle :
 	public Buff
 {
 public:
-	SlowPlayer();
+	SpeedPaddle();
 	virtual void onBuffStart(GameObject *object);
 	virtual void onBuffEnd(GameObject *object);
-	~SlowPlayer();
+	~SpeedPaddle();
 };
 

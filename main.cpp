@@ -2,6 +2,7 @@
 #include "MenuState.h"
 int main()
 {
+	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1280, 800), "SFML works!");
 	window.setFramerateLimit(60);
 	sf::Clock frameClock;

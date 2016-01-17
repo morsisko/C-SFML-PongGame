@@ -1,15 +1,14 @@
 #include "Ball.h"
 
 
-Ball::Ball(float x, float y) : GameObject(x, y, "ball.png")
+Ball::Ball(float x, float y) : GameObject("Ball", x, y, "ball.png")
 {
 	type = BALL;
 	position.x -= (collider.width / 2);
 	position.y -= (collider.height / 2);
 	updateCollider(false);
 	dir = LEFT;
-	currentSpeed.verticalSpeed = 0.0f;
-	currentSpeed.horizonSpeed = 800.0f;
+	setSpeed(800.0f, 0.0f);
 }
 
 void Ball::changeDirection()
@@ -27,12 +26,12 @@ void Ball::onCollisionWithPaddle()
 {
 	changeDirection();
 	lastPlayer = lastColliderObject;
-	currentSpeed.verticalSpeed = 3 * (lastColliderObject->getCollider().top + (lastColliderObject->getCollider().height / 2) - (this->position.y + (this->collider.height / 2)));
+	setSpeed(this->getOriginalSpeed().horizonSpeed, 3 * (lastColliderObject->getCollider().top + (lastColliderObject->getCollider().height / 2) - (this->position.y + (this->collider.height / 2))));
 }
 
 void Ball::onCollisionWithWall()
 {
-	currentSpeed.verticalSpeed *= -1;
+	reverseVerticalSpeed();
 }
 
 GameObject* Ball::getLastPlayer()

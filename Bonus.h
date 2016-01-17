@@ -10,7 +10,6 @@ private:
 public:
 	Bonus(float x, float y, sf::Texture texture, Buff *buff);
 	Buff* getBuff();
-	void onCollision(GameObject *object);
 	~Bonus();
 };
 
